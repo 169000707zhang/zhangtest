@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="maven.ssm.dao.BattleDao">
+
+<insert id="addBattle" parameterType="maven.ssm.entity.Battle" >
+ 	insert into battle(matchid,playerid1,playerid2,song1,song2,polls1,polls2,state) values(#{matchid},#{playerid1},#{playerid2},#{song1},#{song2},#{polls1},#{polls2},#{state});
+</insert>
+ 
+ <select id="isBattle" parameterType="int" resultType="int">
+ select count(1) from battle where battleid=#{battleid}
+ </select>
+ 
+ 
+<select id="getBattles"  resultType="maven.ssm.entity.Battle">
+		select * from battle
+</select>
+
+ <select id="getBattleByid"  parameterType="int" resultType="maven.ssm.entity.Battle">
+		select * from battle where battleid=#{battleid}
+</select>
+
+<update id="changeState" parameterType="maven.ssm.entity.Battle" >
+		update battle set state=1 where battleid=#{battleid}
+</update>
+
+
+<select id="getBattlesbyState"   resultType="maven.ssm.entity.Battle">
+		select * from battle where state=1
+</select>
+
+</mapper>
